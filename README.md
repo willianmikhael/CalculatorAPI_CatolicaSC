@@ -15,3 +15,4 @@
 - Thymeleaf
 - Spring Boot
 - HTML
+- Redis

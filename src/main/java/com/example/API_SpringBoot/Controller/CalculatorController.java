@@ -17,18 +17,25 @@ public class CalculatorController {
     @PostMapping("/")
     public String calculatorSubmit(@RequestParam int num1, @RequestParam int num2, @RequestParam String operation, Model model) {
         int result = 0;
-
-        if (operation.equals("+")) {
-            result = num1 + num2;
-        } else if (operation.equals("-")) {
-            result = num1 - num2;
-        } else if (operation.equals("*")) {
-            result = num1 * num2;
-        } else if (operation.equals("/")) {
-            result = num1 / num2;
+        try {
+            if (operation.equals("+")) {
+                result = num1 + num2;
+            } else if (operation.equals("-")) {
+                result = num1 - num2;
+            } else if (operation.equals("*")) {
+                result = num1 * num2;
+            } else if (operation.equals("/")) {
+                if (num2 == 0) {
+                    throw new Exception("Não é possível dividir por zero.");
+                }
+                result = num1 / num2;
+            } else {
+                throw new Exception("Operação matemática inválida.");
+            }
+            model.addAttribute("result", result);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", e.getMessage());
         }
-
-        model.addAttribute("result", result);
         return "calculator";
     }
 }

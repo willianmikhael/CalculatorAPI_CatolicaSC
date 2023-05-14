@@ -21,5 +21,10 @@
 </form>
 <br>
 <h2>Result: <span th:text="${result}"></span></h2>
+
+<div th:if="${errorMessage}" style="color: red">
+    <p th:text="${errorMessage}"></p>
+</div>
+
 </body>
 </html>
